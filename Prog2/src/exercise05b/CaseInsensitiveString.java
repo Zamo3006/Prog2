@@ -37,19 +37,21 @@ public class CaseInsensitiveString
 		if (s == null) {
 			return false;
 		}
-		char[] thisLower = this.asString().toLowerCase().toCharArray();
-		char[] otherLower = s.asString().toLowerCase().toCharArray();
-
-		if (thisLower.length != otherLower.length) {
-			return false;
-		}
-		for (int i = 0; i < thisLower.length; i++) {
-			if (thisLower[i] != otherLower[i]) {
-				return false;
-			}
-		}
+//		char[] thisLower = this.asString().toLowerCase().toCharArray();
+//		char[] otherLower = s.asString().toLowerCase().toCharArray();
+//
+//		if (thisLower.length != otherLower.length) {
+//			return false;
+//		}
+//		for (int i = 0; i < thisLower.length; i++) {
+//			if (thisLower[i] != otherLower[i]) {
+//				return false;
+//			}
+//		}
+//		
+//		return true;
 		
-		return true;
+		return this.asString().equalsIgnoreCase(s.asString());
 	}
 	
 
