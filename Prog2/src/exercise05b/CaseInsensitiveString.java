@@ -31,29 +31,39 @@ public class CaseInsensitiveString
 	}
 // ***************************************************************************
 // Hier fehlt die Implementierung einer passenden equals-Methode
-	
+
+	public boolean equals2(CaseInsensitiveString s) {
+		if (s == null) {
+			return false;
+		}
+
+		char[] thisLower = this.asString().toLowerCase().toCharArray();
+		char[] otherLower = s.asString().toLowerCase().toCharArray();
+
+		if (thisLower.length != otherLower.length) {
+			return false;
+		}
+		for (int i = 0; i < thisLower.length; i++) {
+			if (thisLower[i] != otherLower[i]) {
+				return false;
+			}
+		}
+
+		return true;
+
+	}
+
+	/**
+	 * @author Patrick Budig 5115455
+	 */
 	public boolean equals(CaseInsensitiveString s) {
 
 		if (s == null) {
 			return false;
 		}
-//		char[] thisLower = this.asString().toLowerCase().toCharArray();
-//		char[] otherLower = s.asString().toLowerCase().toCharArray();
-//
-//		if (thisLower.length != otherLower.length) {
-//			return false;
-//		}
-//		for (int i = 0; i < thisLower.length; i++) {
-//			if (thisLower[i] != otherLower[i]) {
-//				return false;
-//			}
-//		}
-//		
-//		return true;
-		
+
 		return this.asString().equalsIgnoreCase(s.asString());
 	}
-	
 
 // ***************************************************************************
 
