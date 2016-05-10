@@ -17,7 +17,6 @@ public class Stock implements GoodsSink, GoodsSource {
 	@Override
 	public void receive(int count) {
 		this.count += count;
-
 	}
 
 	public String toString() {

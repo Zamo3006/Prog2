@@ -2,16 +2,15 @@ package exercise06;
 
 public class Customer extends Partner implements GoodsSink {
 
+	private int count;
+	
 	public Customer(String name, String city) {
 		super(name, city);
 	}
 
-	private int count;
-
 	@Override
 	public void receive(int count) {
 		this.count += count;
-
 	}
 
 	@Override
@@ -22,7 +21,7 @@ public class Customer extends Partner implements GoodsSink {
 
 	public void sendInvoice() {
 		System.out.println(toString());
-		System.out.println("Anzahl Glühbirnen: " + count);
+		System.out.println("Anzahl Glühbirnen geliefert: " + count);
 		count = 0;
 	}
 }
