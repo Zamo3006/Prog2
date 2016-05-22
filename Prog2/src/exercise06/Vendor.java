@@ -1,5 +1,7 @@
 package exercise06;
-
+/**
+ * @author Patrick Budig 5115455
+ */
 public class Vendor extends Partner implements GoodsSource {
 
 	public Vendor(String name, String city) {

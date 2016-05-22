@@ -1,5 +1,7 @@
 package exercise06;
-
+/**
+ * @author Patrick Budig 5115455
+ */
 public class Customer extends Partner implements GoodsSink {
 
 	private int count;

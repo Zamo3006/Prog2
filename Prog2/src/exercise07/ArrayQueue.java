@@ -1,5 +1,9 @@
 package exercise07;
 
+/**
+ * @author Patrick Budig 5115455
+ */
+
 public class ArrayQueue<T> implements Queue<T> {
 
 	private T[] queue;

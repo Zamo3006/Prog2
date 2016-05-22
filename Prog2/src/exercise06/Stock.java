@@ -1,5 +1,7 @@
 package exercise06;
-
+/**
+ * @author Patrick Budig 5115455
+ */
 public class Stock implements GoodsSink, GoodsSource {
 
 	private int count;
@@ -20,7 +22,7 @@ public class Stock implements GoodsSink, GoodsSource {
 	}
 
 	public String toString() {
-		String returnString = "Anzahl Glühbirnen im Lager: " + count;
+		String returnString = "Lager: Anzahl Glühbirnen: " + count;
 		return returnString;
 	}
 
