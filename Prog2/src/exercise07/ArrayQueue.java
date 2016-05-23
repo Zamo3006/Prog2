@@ -8,25 +8,25 @@ public class ArrayQueue<T> implements Queue<T> {
 
 	private T[] queue;
 	private int firstObject;
-	private int firstEmptySlot;
+	private int nextEmptySlot;
 	private int size;
 
 	public ArrayQueue(int size) {
 		queue = (T[]) new Object[size];
 		firstObject = -1;
-		firstEmptySlot = 0;
+		nextEmptySlot = 0;
 		this.size = size;
 	}
 
 	@Override
 	public void enqueue(T element) throws IllegalAccessException {
-		if (firstObject == firstEmptySlot) {
+		if (firstObject == nextEmptySlot) {
 			throw new IllegalAccessException("Queue voll!");
 		} else {
 
-			queue[firstEmptySlot] = element;
+			queue[nextEmptySlot] = element;
 
-			firstEmptySlot = (firstEmptySlot + 1) % size;
+			nextEmptySlot = (nextEmptySlot + 1) % size;
 
 			if (empty()) {
 				firstObject = 0;
@@ -44,9 +44,9 @@ public class ArrayQueue<T> implements Queue<T> {
 			queue[firstObject] = null;
 			firstObject = (firstObject + 1) % size;
 
-			if (firstObject == firstEmptySlot) {
+			if (firstObject == nextEmptySlot) {
 				firstObject = -1;
-				firstEmptySlot = 0;
+				nextEmptySlot = 0;
 			}
 		}
 		return returnObject;
