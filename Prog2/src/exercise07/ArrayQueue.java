@@ -11,6 +11,7 @@ public class ArrayQueue<T> implements Queue<T> {
 	private int nextEmptySlot;
 	private int size;
 
+	@SuppressWarnings("unchecked")
 	public ArrayQueue(int size) {
 		queue = (T[]) new Object[size];
 		firstObject = -1;
@@ -23,11 +24,8 @@ public class ArrayQueue<T> implements Queue<T> {
 		if (firstObject == nextEmptySlot) {
 			throw new IllegalAccessException("Queue voll!");
 		} else {
-
 			queue[nextEmptySlot] = element;
-
 			nextEmptySlot = (nextEmptySlot + 1) % size;
-
 			if (empty()) {
 				firstObject = 0;
 			}
