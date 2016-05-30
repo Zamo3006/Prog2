@@ -19,7 +19,7 @@ public class FileDecryptor {
 			DecryptInputStream dis = new DecryptInputStream(is, key);
 			while (readDecryptedData > 0) {
 				readDecryptedData = dis.read();
-				System.out.println((char) readDecryptedData);
+				if(readDecryptedData > 0) System.out.println((char) readDecryptedData);
 			}
 			dis.close();
 		} catch (Exception e) {
