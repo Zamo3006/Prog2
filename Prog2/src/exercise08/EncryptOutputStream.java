@@ -20,7 +20,6 @@ public class EncryptOutputStream extends OutputStream {
 	@Override
 	public void write(int arg0) throws IOException {
 		os.write(encrypt(arg0));
-
 	}
 
 	@Override

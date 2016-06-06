@@ -10,16 +10,15 @@ import java.io.*;
 
 public class FileDecryptor {
 
-	// Diese Methode muss nach den Vorgaben implementiert werden.
 	public static void decryptFile(String filename) {
-		int key = 100;
 		try {
-			int readDecryptedData = 1;
+			int readDecryptedData = 0;
 			InputStream is = new FileInputStream(filename);
-			DecryptInputStream dis = new DecryptInputStream(is, key);
-			while (readDecryptedData > 0) {
+			DecryptInputStream dis = new DecryptInputStream(is, 100);
+			while (readDecryptedData >= 0) {
 				readDecryptedData = dis.read();
-				if(readDecryptedData > 0) System.out.println((char) readDecryptedData);
+				if (readDecryptedData >= 0)
+					System.out.print((char) readDecryptedData);
 			}
 			dis.close();
 		} catch (Exception e) {
@@ -31,7 +30,7 @@ public class FileDecryptor {
 	// implementierenden Methode. An der Ausgabe koennen Sie
 	// erkennen, ob Ihre Implementierung funktioniert.
 	public static void main(String[] args) {
-		decryptFile("C:/Users/Budig/git/Prog2/Prog2/src/exercise08/data.crypt");
+		decryptFile("./src/exercise08/data.crypt");
 	}
 
 }
