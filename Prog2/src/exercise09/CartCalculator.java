@@ -8,12 +8,14 @@ public class CartCalculator extends AbstractCartCalculator {
 
 	@Override
 	public double totalPrice(InputStream in) {
-		boolean end = false;
 		double totalPrice = 0.0;
-		int artikelNummer = -1;
-		int anzahl = -1;
-		double preis = -1;
 		if (in != null) {
+			
+			boolean end = false;
+			int artikelNummer = -1;
+			int anzahl = -1;
+			double preis = -1;
+
 			try {
 				do {
 					if ((artikelNummer = readInt(in)) != -1 && (anzahl = readInt(in)) != -1
@@ -52,7 +54,6 @@ public class CartCalculator extends AbstractCartCalculator {
 		}
 		return readDouble;
 	}
-
 
 	public static void main(String[] args) {
 		CartCalculator calc = new CartCalculator();
