@@ -10,6 +10,9 @@ import java.io.*;
 
 public class FileDecryptor {
 
+	/**
+	 * Patrick Budig - 5115455 
+	 */
 	public static void decryptFile(String filename) {
 		try {
 			int readDecryptedData = 0;

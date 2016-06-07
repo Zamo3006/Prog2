@@ -10,13 +10,14 @@ public class CartCalculator extends AbstractCartCalculator {
 	public double totalPrice(InputStream in) {
 		boolean end = false;
 		double totalPrice = 0.0;
+		int artikelNummer = -1;
+		int anzahl = -1;
+		double preis = -1;
 		if (in != null) {
 			try {
 				do {
-					int artikelNummer = readInt(in);
-					int anzahl = readInt(in);
-					double preis = readDouble(in);
-					if (artikelNummer > 0 && anzahl > 0 && preis > 0) {
+					if ((artikelNummer = readInt(in)) != -1 && (anzahl = readInt(in)) != -1
+							&& (preis = readDouble(in)) != -1) {
 						totalPrice += (anzahl * preis);
 					} else {
 						end = true;
@@ -30,39 +31,28 @@ public class CartCalculator extends AbstractCartCalculator {
 		return totalPrice;
 	}
 
-	private double readDouble(InputStream in) throws IOException {
-		double returnDouble = 0;
-		byte[] readBytes = new byte[8];
-		for (int i = 0; i < 8; i++) {
-			readBytes[i] = readByte(in);
-			if (readBytes[i] == -1) {
-				return -1;
-			}
-		}
-		ByteBuffer bb = ByteBuffer.wrap(readBytes);
-		returnDouble = bb.getDouble();
-		return returnDouble;
-	}
-
 	private int readInt(InputStream in) throws IOException {
-		int returnInt = 0;
-		byte[] readBytes = new byte[4];
-		for (int i = 0; i < 4; i++) {
-			readBytes[i] = readByte(in);
-			if (readBytes[i] == -1) {
-				return -1;
-			}
+		byte[] b = new byte[4];
+		int readLength = in.read(b);
+		int readInt = -1;
+		if (readLength == 4) {
+			ByteBuffer bb = ByteBuffer.wrap(b);
+			readInt = bb.getInt();
 		}
-		ByteBuffer bb = ByteBuffer.wrap(readBytes);
-		returnInt = bb.getInt();
-		return returnInt;
+		return readInt;
 	}
 
-	private byte readByte(InputStream in) throws IOException {
-		byte returnByte = 0;
-		returnByte = (byte) in.read();
-		return returnByte;
+	private double readDouble(InputStream in) throws IOException {
+		byte[] b = new byte[8];
+		int readLength = in.read(b);
+		double readDouble = -1;
+		if (readLength == 8) {
+			ByteBuffer bb = ByteBuffer.wrap(b);
+			readDouble = bb.getDouble();
+		}
+		return readDouble;
 	}
+
 
 	public static void main(String[] args) {
 		CartCalculator calc = new CartCalculator();
