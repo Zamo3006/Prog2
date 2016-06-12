@@ -11,23 +11,24 @@ public class CartCalculator extends AbstractCartCalculator {
 		double totalPrice = 0.0;
 		if (in != null) {
 
+			boolean end = false;
 			int artikelNummer = -1;
 			int anzahl = -1;
 			double preis = -1;
 
-			try {
-				while ((artikelNummer = readInt(in)) != -1 && (anzahl = readInt(in)) != -1
-						&& (preis = readDouble(in)) != -1) {
-					totalPrice += (anzahl * preis);
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			} finally {
+			while (!end) {
 				try {
-					in.close();
+					artikelNummer = readInt(in);
+					anzahl = readInt(in);
+					preis = readDouble(in);
+					totalPrice += (anzahl * preis);
 				} catch (IOException e) {
-					e.printStackTrace();
+					end = true;
 				}
+			}
+			try {
+				in.close();
+			} catch (IOException e) {
 			}
 		}
 		return totalPrice;
@@ -35,21 +36,21 @@ public class CartCalculator extends AbstractCartCalculator {
 
 	private int readInt(InputStream in) throws IOException {
 		byte[] b = new byte[4];
-		int readInt = -1;
-		if (in.read(b) == 4) {
-			ByteBuffer bb = ByteBuffer.wrap(b);
-			readInt = bb.getInt();
+		if (in.read(b) != 4) {
+			throw new IOException("End of File");
 		}
+		ByteBuffer bb = ByteBuffer.wrap(b);
+		int readInt = bb.getInt();
 		return readInt;
 	}
 
 	private double readDouble(InputStream in) throws IOException {
 		byte[] b = new byte[8];
-		double readDouble = -1;
-		if (in.read(b) == 8) {
-			ByteBuffer bb = ByteBuffer.wrap(b);
-			readDouble = bb.getDouble();
+		if (in.read(b) != 8) {
+			throw new IOException("End of File");
 		}
+		ByteBuffer bb = ByteBuffer.wrap(b);
+		double readDouble = bb.getDouble();
 		return readDouble;
 	}
 
