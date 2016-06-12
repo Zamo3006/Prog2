@@ -35,9 +35,8 @@ public class CartCalculator extends AbstractCartCalculator {
 
 	private int readInt(InputStream in) throws IOException {
 		byte[] b = new byte[4];
-		int readLength = in.read(b);
 		int readInt = -1;
-		if (readLength == 4) {
+		if (in.read(b) == 4) {
 			ByteBuffer bb = ByteBuffer.wrap(b);
 			readInt = bb.getInt();
 		}
@@ -46,9 +45,8 @@ public class CartCalculator extends AbstractCartCalculator {
 
 	private double readDouble(InputStream in) throws IOException {
 		byte[] b = new byte[8];
-		int readLength = in.read(b);
 		double readDouble = -1;
-		if (readLength == 8) {
+		if (in.read(b) == 8) {
 			ByteBuffer bb = ByteBuffer.wrap(b);
 			readDouble = bb.getDouble();
 		}
