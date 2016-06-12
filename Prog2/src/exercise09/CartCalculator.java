@@ -10,24 +10,24 @@ public class CartCalculator extends AbstractCartCalculator {
 	public double totalPrice(InputStream in) {
 		double totalPrice = 0.0;
 		if (in != null) {
-			
-			boolean end = false;
+
 			int artikelNummer = -1;
 			int anzahl = -1;
 			double preis = -1;
 
 			try {
-				do {
-					if ((artikelNummer = readInt(in)) != -1 && (anzahl = readInt(in)) != -1
-							&& (preis = readDouble(in)) != -1) {
-						totalPrice += (anzahl * preis);
-					} else {
-						end = true;
-					}
-				} while (!end);
-				in.close();
+				while ((artikelNummer = readInt(in)) != -1 && (anzahl = readInt(in)) != -1
+						&& (preis = readDouble(in)) != -1) {
+					totalPrice += (anzahl * preis);
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					in.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		return totalPrice;
