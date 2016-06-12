@@ -3,6 +3,8 @@ package exercise09;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class CartCalculator extends AbstractCartCalculator {
 
@@ -11,14 +13,13 @@ public class CartCalculator extends AbstractCartCalculator {
 		double totalPrice = 0.0;
 		if (in != null) {
 
-			int artikelNummer = -1;
-			int anzahl = -1;
-			double preis = -1;
+			AtomicInteger artikelNummer = new AtomicInteger(0);
+			AtomicInteger anzahl = new AtomicInteger(0);
+			AtomicReference<Double> preis = new AtomicReference<Double>(0.0);
 
 			try {
-				while ((artikelNummer = readInt(in)) != -1 && (anzahl = readInt(in)) != -1
-						&& (preis = readDouble(in)) != -1) {
-					totalPrice += (anzahl * preis);
+				while (readInt(in, artikelNummer)  && readInt(in, anzahl)	&&  readDouble(in, preis) ) {
+					totalPrice += (anzahl.get() * preis.get());
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -33,24 +34,26 @@ public class CartCalculator extends AbstractCartCalculator {
 		return totalPrice;
 	}
 
-	private int readInt(InputStream in) throws IOException {
+	private boolean readInt(InputStream in, AtomicInteger i) throws IOException {
 		byte[] b = new byte[4];
 		int readLength = in.read(b);
-		int readInt = -1;
+		boolean readInt = false;
 		if (readLength == 4) {
 			ByteBuffer bb = ByteBuffer.wrap(b);
-			readInt = bb.getInt();
+			i.set(bb.getInt());
+			readInt = true;
 		}
 		return readInt;
 	}
 
-	private double readDouble(InputStream in) throws IOException {
+	private boolean readDouble(InputStream in, AtomicReference<Double> d) throws IOException {
 		byte[] b = new byte[8];
 		int readLength = in.read(b);
-		double readDouble = -1;
+		boolean readDouble = false;
 		if (readLength == 8) {
 			ByteBuffer bb = ByteBuffer.wrap(b);
-			readDouble = bb.getDouble();
+			d.set(bb.getDouble());
+			readDouble = true;
 		}
 		return readDouble;
 	}
