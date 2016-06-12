@@ -36,9 +36,8 @@ public class CartCalculator extends AbstractCartCalculator {
 
 	private boolean readInt(InputStream in, AtomicInteger i) throws IOException {
 		byte[] b = new byte[4];
-		int readLength = in.read(b);
 		boolean readInt = false;
-		if (readLength == 4) {
+		if (in.read(b) == 4) {
 			ByteBuffer bb = ByteBuffer.wrap(b);
 			i.set(bb.getInt());
 			readInt = true;
@@ -48,9 +47,8 @@ public class CartCalculator extends AbstractCartCalculator {
 
 	private boolean readDouble(InputStream in, AtomicReference<Double> d) throws IOException {
 		byte[] b = new byte[8];
-		int readLength = in.read(b);
 		boolean readDouble = false;
-		if (readLength == 8) {
+		if (in.read(b) == 8) {
 			ByteBuffer bb = ByteBuffer.wrap(b);
 			d.set(bb.getDouble());
 			readDouble = true;
