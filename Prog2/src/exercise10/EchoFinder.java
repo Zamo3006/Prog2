@@ -2,7 +2,6 @@ package exercise10;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
@@ -33,8 +32,7 @@ public class EchoFinder implements EchoFinderInterface {
 
 	@Override
 	public BufferedReader getSystemInAsBufferedReader() {
-		InputStream inputStream = System.in;
-		Reader reader = new InputStreamReader(inputStream);
+		Reader reader = new InputStreamReader(System.in);
 		BufferedReader bufferedReader = new BufferedReader(reader);
 		return bufferedReader;
 	}
